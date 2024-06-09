@@ -10,9 +10,6 @@ export class Note {
     })
     id: string;
 
-    @Column()
-    title: string;
-
     @Column({
         type: 'text'
     })
