@@ -1,5 +1,50 @@
 <%- include('./components/header.ejs') %>
 
-在写了在写了
+<link rel="stylesheet" href="/css/simple-form.css">
+
+<div class="form">
+    <% if (!user) { %>
+        <div class="button-container">
+            <a href="/user/login" class="button login">登录</a>
+            <a href="/user/register" class="button register">注册</a>
+        </div>
+    <% } else { %>
+        <div class="button-container">
+            <a href="/user/logout" class="button logout">退出</a>
+            <a href="/notes" class="button notes">笔记</a>
+            <a href="/notes/new" class="button new-note">新建</a>
+        </div>
+    <% } %>
+</div>
+
+<style>
+    :root {
+        --bg-color: var(--very-light-blue);
+    }
+
+    a {
+        margin: 10px;
+    }
+
+    a.login {
+        --theme-color: var(--light-blue);
+    }
+    
+    a.register {
+        --theme-color: var(--pink);
+    }
+
+    a.logout {
+        --theme-color: var(--pink);
+    }
+
+    a.notes {
+        --theme-color: var(--purple);
+    }
+
+    a.new-note {
+        --theme-color: var(--light-blue);
+    }
+</style>
 
 <%- include('./components/footer.ejs') %>

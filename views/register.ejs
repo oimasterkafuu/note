@@ -1,6 +1,6 @@
 <%- include('./components/header.ejs') %>
 
-<link rel="stylesheet" href="/css/login-register.css">
+<link rel="stylesheet" href="/css/simple-form.css">
 
 <form id="register-form">
     <input type="text" id="username" name="username" placeholder="用户名">
@@ -40,5 +40,15 @@
         });
     });
 </script>
+
+<style>
+    :root {
+        --bg-color: var(--very-light-pink);
+    }
+
+    button {
+        --theme-color: var(--pink);
+    }
+</style>
 
 <%- include('./components/footer.ejs') %>

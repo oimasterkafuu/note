@@ -4,7 +4,7 @@ div.container {
     align-items: center;
 }
 
-form {
+form, div.form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,11 +25,15 @@ input {
 
 input:focus {
     outline: none;
-    box-shadow: 0 0 5px var(--light-blue);
+    box-shadow: 0 0 5px var(--theme-color);
 }
 
-button {
-    background-color: var(--light-blue);
+a.button {
+    text-decoration: none;
+}
+
+button, a.button {
+    background-color: var(--theme-color);
     color: white;
 
     font-size: 25px;
@@ -44,6 +48,6 @@ button {
     transition: box-shadow 0.3s;
 }
 
-button:hover {
-    box-shadow: 0 0 5px var(--light-blue);
+button:hover, a.button:hover {
+    box-shadow: 0 0 5px var(--theme-color);
 }

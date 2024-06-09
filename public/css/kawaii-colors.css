@@ -4,8 +4,10 @@
     --pink: #eaadca;
     --light-yellow: #ffffc7;
     --very-light-blue: #d6e8f7;
+    --light-pink: #f7d7e8;
+    --very-light-pink: #f9e8f8;
 }
 
 html {
-    background-color: var(--very-light-blue);
+    background-color: var(--bg-color);
 }
