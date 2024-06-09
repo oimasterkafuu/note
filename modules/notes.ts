@@ -2,6 +2,7 @@ import { Router } from 'express';
 const notesRouter = Router();
 
 import { randomString } from '../utils';
+import { ErrorCodes } from '../errors';
 
 import { Note } from '../entities/notes';
 import { User } from '../entities/users';
@@ -64,8 +65,9 @@ notesRouter.get('/edit/:id', (req, res) => {
 
 notesRouter.post('/edit/:id', (req, res) => {
     if (!res.locals.user) {
-        res.redirect('/user/login');
-        return;
+        res.status(401).send({
+            status: ErrorCodes.NOT_LOGGED_IN
+        })
     }
 
     if(req.params.id === 'new') {
@@ -75,9 +77,8 @@ notesRouter.post('/edit/:id', (req, res) => {
             content: req.body.content
         })
 
-        res.status(200).send({
-            status: 'ok',
-            message: '保存成功！'
+        res.send({
+            status: ErrorCodes.SUCCESS
         });
         return;
     }
@@ -89,8 +90,7 @@ notesRouter.post('/edit/:id', (req, res) => {
     }).then(note => {
         if (!note) {
             res.status(400).send({
-                status: 'error',
-                message: '你该不是记错笔记的编号了吧……'
+                status: ErrorCodes.NOTE_NOT_FOUND
             });
             return;
         }
@@ -99,9 +99,8 @@ notesRouter.post('/edit/:id', (req, res) => {
         note.updatedAt = new Date();
         res.app.locals.db.getRepository(Note).save(note);
 
-        res.status(200).send({
-            status: 'ok',
-            message: '保存成功！'
+        res.send({
+            status: ErrorCodes.SUCCESS
         });
     });
 });

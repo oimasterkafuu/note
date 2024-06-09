@@ -11,17 +11,31 @@
 <script>
     $("#register-form").submit((event) => {
         event.preventDefault();
+        const username = $("#username").val();
+        const password = $("#password").val();
+
+        if (!username || !password) {
+            alert("用户名和密码不能为空");
+            return;
+        }
+        if (password.length < 6) {
+            alert("密码太短");
+            return;
+        }
+
         $.ajax({
             url: "/user/register",
             type: "POST",
             data: {
-                username: $("#username").val(),
-                password: sha256($("#password").val())
+                username: username,
+                password: sha256(password)
             },
             success: (data) => {
-                if (data.status === 'ok') {
-                    location.href = '/';
-                }
+                location.href = '/';
+            },
+            error: (error) => {
+                const data = error.responseJSON;
+                alert(ErrorText[data.status]);
             }
         });
     });

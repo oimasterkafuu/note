@@ -15,11 +15,11 @@
                 content: $("#note-content").val()
             },
             success: (data) => {
-                if (data.status === 'ok') {
-                    alert("保存成功");
-                } else {
-                    alert(data.message);
-                }
+                alert(ErrorText[data.status]);
+            },
+            error: (error) => {
+                const data = error.responseJSON;
+                alert(ErrorText[data.status]);
             }
         });
     });

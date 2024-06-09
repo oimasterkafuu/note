@@ -1,9 +1,10 @@
 import { Router } from 'express';
 const usersRouter = Router();
 
-import { User } from '../entities/users';
-
 import { sha256 } from '../utils';
+import { ErrorCodes } from '../errors';
+
+import { User } from '../entities/users';
 
 usersRouter.get('/login', (req, res) => {
     if (res.locals.user) {
@@ -16,16 +17,14 @@ usersRouter.get('/login', (req, res) => {
 usersRouter.post('/login', (req, res) => {
     if (res.locals.user) {
         res.status(400).send({
-            status: 'error',
-            message: '想捉弄我？你已经登录过了吧！'
+            status: ErrorCodes.ALREADY_LOGGED_IN
         });
         return;
     }
 
     if (!req.body.username || !req.body.password) {
         res.status(400).send({
-            status: 'error',
-            message: '喂喂喂！你还没填完用户名和密码就交上来了？'
+            status: ErrorCodes.USERNAME_OR_PASSWORD_EMPTY
         });
         return;
     }
@@ -44,13 +43,11 @@ usersRouter.post('/login', (req, res) => {
             res.app.locals.db.getRepository(User).save(user);
             req.session.user = user;
             res.send({
-                status: 'ok',
-                message: '登录成功！'
+                status: ErrorCodes.SUCCESS
             });
         } else {
             res.status(401).send({
-                status: 'error',
-                message: '哎呀！用户名或密码不对啊？'
+                status: ErrorCodes.USERNAME_OR_PASSWORD_INCORRECT
             });
         }
     });
@@ -67,15 +64,13 @@ usersRouter.get('/register', (req, res) => {
 usersRouter.post('/register', (req, res) => {
     if (res.locals.user) {
         res.status(400).send({
-            status: 'error',
-            message: '想捉弄我？你已经登录过了吧！'
+            status: ErrorCodes.ALREADY_LOGGED_IN
         });
         return;
     }
     if (!req.body.username || !req.body.password) {
         res.status(400).send({
-            status: 'error',
-            message: '喂喂喂！你还没填完用户名和密码就交上来了？'
+            status: ErrorCodes.USERNAME_OR_PASSWORD_EMPTY
         });
         return;
     }
@@ -86,8 +81,7 @@ usersRouter.post('/register', (req, res) => {
     const usernameRegex = /^[a-zA-Z0-9_]{4,16}$/;
     if (!usernameRegex.test(username)) {
         res.status(400).send({
-            status: 'error',
-            message: '怎么会有这么奇怪的用户名？它只能由字母、数字和下划线组成，长度在 4 到 16 之间！'
+            status: ErrorCodes.USERNAME_INVALID
         });
         return;
     }
@@ -99,8 +93,7 @@ usersRouter.post('/register', (req, res) => {
     }).then(user => {
         if (user) {
             res.status(400).send({
-                status: 'error',
-                message: '哎呀！用户名已经被注册了！'
+                status: ErrorCodes.USERNAME_TAKEN
             });
         } else {
             res.app.locals.db.getRepository(User).insert({
@@ -117,14 +110,12 @@ usersRouter.post('/register', (req, res) => {
                             req.session.user = user;
                         }
                         res.send({
-                            status: 'ok',
-                            message: '注册成功！'
+                            status: ErrorCodes.SUCCESS
                         })
                     })
                 } else {
                     res.status(500).send({
-                        status: 'error',
-                        message: '哎呀！注册失败了，待会儿再试试？'
+                        status: ErrorCodes.INTERNAL_ERROR
                     });
                 }
             });

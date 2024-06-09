@@ -19,9 +19,11 @@
                 password: sha256($("#password").val())
             },
             success: (data) => {
-                if (data.status === 'ok') {
-                    location.href = '/';
-                }
+                location.href = '/';
+            },
+            error: (error) => {
+                const data = error.responseJSON;
+                alert(ErrorText[data.status]);
             }
         });
     });
