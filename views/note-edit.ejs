@@ -6,16 +6,20 @@
 </form>
 
 <script>
+    const id = "<%- id %>";
     $("#note-edit-form").submit((event) => {
         event.preventDefault();
         $.ajax({
-            url: "/note/edit/<%= id %>",
+            url: `/note/edit/${id}`,
             type: "POST",
             data: {
                 content: $("#note-content").val()
             },
             success: (data) => {
                 alert(ErrorText[data.status]);
+                if (id === 'new') {
+                    location.href = '/note/edit/' + data.id;
+                }
             },
             error: (error) => {
                 const data = error.responseJSON;

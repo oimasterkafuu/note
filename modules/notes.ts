@@ -75,11 +75,12 @@ notesRouter.post('/edit/:id', (req, res) => {
             id: randomString(8),
             user: res.locals.user,
             content: req.body.content
+        }).then(note => {
+            res.send({
+                status: ErrorCodes.SUCCESS,
+                id: note.id
+            });
         })
-
-        res.send({
-            status: ErrorCodes.SUCCESS
-        });
         return;
     }
 
