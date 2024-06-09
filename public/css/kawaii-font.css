@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'FZFWZhuZiAYuanJWR';
+    src: url('/font/FZFWZhuZiAYuanJWR.TTF') format('truetype');
+}
+
+body {
+    font-family: 'FZFWZhuZiAYuanJWR', sans-serif;
+}
