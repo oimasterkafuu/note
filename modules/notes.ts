@@ -72,11 +72,10 @@ notesRouter.post('/edit/:id', (req, res) => {
         res.app.locals.db.getRepository(Note).save({
             id: randomString(8),
             user: res.locals.user,
-            title: '未命名的笔记',
             content: req.body.content
         })
 
-        res.status(200).json({
+        res.status(200).send({
             status: 'ok',
             message: '保存成功！'
         });
@@ -89,7 +88,7 @@ notesRouter.post('/edit/:id', (req, res) => {
         }
     }).then(note => {
         if (!note) {
-            res.status(400).json({
+            res.status(400).send({
                 status: 'error',
                 message: '你该不是记错笔记的编号了吧……'
             });
@@ -100,7 +99,7 @@ notesRouter.post('/edit/:id', (req, res) => {
         note.updatedAt = new Date();
         res.app.locals.db.getRepository(Note).save(note);
 
-        res.status(200).json({
+        res.status(200).send({
             status: 'ok',
             message: '保存成功！'
         });

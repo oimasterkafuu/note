@@ -15,7 +15,7 @@ usersRouter.get('/login', (req, res) => {
 
 usersRouter.post('/login', (req, res) => {
     if (res.locals.user) {
-        res.status(400).json({
+        res.status(400).send({
             status: 'error',
             message: '想捉弄我？你已经登录过了吧！'
         });
@@ -23,7 +23,7 @@ usersRouter.post('/login', (req, res) => {
     }
 
     if (!req.body.username || !req.body.password) {
-        res.status(400).json({
+        res.status(400).send({
             status: 'error',
             message: '喂喂喂！你还没填完用户名和密码就交上来了？'
         });
@@ -48,7 +48,7 @@ usersRouter.post('/login', (req, res) => {
                 message: '登录成功！'
             });
         } else {
-            res.status(401).json({
+            res.status(401).send({
                 status: 'error',
                 message: '哎呀！用户名或密码不对啊？'
             });
@@ -66,14 +66,14 @@ usersRouter.get('/register', (req, res) => {
 
 usersRouter.post('/register', (req, res) => {
     if (res.locals.user) {
-        res.status(400).json({
+        res.status(400).send({
             status: 'error',
             message: '想捉弄我？你已经登录过了吧！'
         });
         return;
     }
     if (!req.body.username || !req.body.password) {
-        res.status(400).json({
+        res.status(400).send({
             status: 'error',
             message: '喂喂喂！你还没填完用户名和密码就交上来了？'
         });
@@ -85,7 +85,7 @@ usersRouter.post('/register', (req, res) => {
 
     const usernameRegex = /^[a-zA-Z0-9_]{4,16}$/;
     if (!usernameRegex.test(username)) {
-        res.status(400).json({
+        res.status(400).send({
             status: 'error',
             message: '怎么会有这么奇怪的用户名？它只能由字母、数字和下划线组成，长度在 4 到 16 之间！'
         });
@@ -98,7 +98,7 @@ usersRouter.post('/register', (req, res) => {
         }
     }).then(user => {
         if (user) {
-            res.status(400).json({
+            res.status(400).send({
                 status: 'error',
                 message: '哎呀！用户名已经被注册了！'
             });
@@ -122,7 +122,7 @@ usersRouter.post('/register', (req, res) => {
                         })
                     })
                 } else {
-                    res.status(500).json({
+                    res.status(500).send({
                         status: 'error',
                         message: '哎呀！注册失败了，待会儿再试试？'
                     });
