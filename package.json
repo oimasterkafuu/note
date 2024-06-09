@@ -8,7 +8,7 @@
   "scripts": {
     "start": "ts-node ./index.ts",
     "debug": "nodemon --exec ts-node ./index.ts",
-    "build": "tsc"
+    "build": "tsc && cp -r ./views ./dist/views"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.7",
