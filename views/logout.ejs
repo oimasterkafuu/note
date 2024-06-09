@@ -1,0 +1,24 @@
+<%- include('./components/header.ejs') %>
+
+<form id="logout-form" action="/user/logout" method="post">
+    <button type="submit">登出</button>
+</form>
+
+<script>
+    $("#logout-form").submit((event) => {
+        event.preventDefault();
+        $.ajax({
+            url: "/user/logout",
+            type: "POST",
+            success: (data) => {
+                location.href = '/';
+            },
+            error: (error) => {
+                const data = error.responseJSON;
+                alert(ErrorText[data.status]);
+            }
+        });
+    });
+</script>
+
+<%- include('./components/footer.ejs') %>

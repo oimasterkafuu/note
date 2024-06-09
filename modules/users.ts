@@ -124,8 +124,25 @@ usersRouter.post('/register', (req, res) => {
 });
 
 usersRouter.get('/logout', (req, res) => {
+    if (!res.locals.user) {
+        res.redirect('/user/login');
+        return;
+    }
+
+    res.render('logout');
+});
+
+usersRouter.post('/logout', (req, res) => {
+    if (!res.locals.user) {
+        res.status(400).send({
+            status: ErrorCodes.NOT_LOGGED_IN
+        })
+        return;
+    }
     req.session.destroy(() => {
-        res.redirect('/');
+        res.send({
+            status: ErrorCodes.SUCCESS
+        });
     });
 });
 

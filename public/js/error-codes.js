@@ -6,8 +6,8 @@ const ErrorCodes = {
     USERNAME_OR_PASSWORD_INCORRECT: 2002,
     USERNAME_INVALID: 2003,
     USERNAME_TAKEN: 2004,
-    NOT_LOGGED_IN: 3000,
-    NOTE_NOT_FOUND: 3001
+    NOT_LOGGED_IN: 2005,
+    NOTE_NOT_FOUND: 3000
 }
 
 const ErrorText = {
@@ -18,7 +18,7 @@ const ErrorText = {
     2002: "用户名或密码错误",
     2003: "用户名无效",
     2004: "用户名已被占用",
-    3000: "您还未登录",
-    3001: "笔记不存在"
+    2005: "您还未登录",
+    3000: "笔记不存在"
 }
 
