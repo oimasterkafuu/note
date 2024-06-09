@@ -1,0 +1,11 @@
+<%- include('./components/header.ejs') %>
+
+<% if (notes.length === 0) { %>
+<p>没有笔记</p>
+<% } else { notes.forEach(function(note) { %>
+<pre>
+<%= JSON.stringify(note, null, 4) %>
+</pre>
+<% }) } %>
+
+<%- include('./components/footer.ejs') %>
