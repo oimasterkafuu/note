@@ -1,0 +1,49 @@
+div.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    width: 100%;
+    font-size: 20px;
+    font-family: 'FZFWZhuZiAYuanJWR', sans-serif;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--light-blue);
+}
+
+button {
+    background-color: var(--light-blue);
+    color: white;
+
+    font-size: 25px;
+    font-family: 'FZFWZhuZiAYuanJWR', sans-serif;
+    font-weight: bold;
+    padding: 7px 15px;
+    border-radius: 10px;
+    border: none;
+
+    cursor: pointer;
+
+    transition: box-shadow 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 5px var(--light-blue);
+}
