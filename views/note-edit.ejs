@@ -1,5 +1,66 @@
 <%- include('./components/header.ejs') %>
 
+<style>
+    :root {
+        --bg-color: var(--very-light-blue);
+    }
+
+    div.container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    form, div.form {
+        width: 90%;
+        height: 90%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    textarea {
+        width: 100%;
+        height: calc(100% - 40px);
+        font-size: 20px;
+        font-family: 'FZFWZhuZiAYuanJWR', sans-serif;
+
+        resize: none;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+    }
+
+    textarea:focus {
+        outline: none;
+        box-shadow: 0 0 5px var(--light-blue);
+    }
+
+    button, a.button {
+        background-color: var(--light-blue);
+        color: white;
+
+        font-size: 25px;
+        font-family: 'FZFWZhuZiAYuanJWR', sans-serif;
+        font-weight: bold;
+        padding: 7px 15px;
+        border-radius: 10px;
+        border: none;
+
+        cursor: pointer;
+
+        transition: box-shadow 0.3s;
+    }
+
+    button:hover, a.button:hover {
+        box-shadow: 0 0 10px var(--light-blue);
+    }
+</style>
+
 <form id="note-edit-form">
     <textarea id="note-content" name="content" rows="10" cols="50"><%= content %></textarea>
     <button type="submit">保存</button>
@@ -30,3 +91,4 @@
 </script>
 
 <%- include('./components/footer.ejs') %>
+
