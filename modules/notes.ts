@@ -23,6 +23,9 @@ notesRouter.get('/', (req, res) => {
             res.redirect('/user/login');
             return;
         }
+        user.notes.sort((a, b) => {
+            return b.updatedAt.getTime() - a.updatedAt.getTime();
+        })
         res.render('notes', {
             notes: user.notes
         });
